@@ -13,3 +13,17 @@ target_link_libraries(
 )
 
 install(TARGETS ntripserver DESTINATION bin)
+install(
+    FILES "${CMAKE_CURRENT_SOURCE_DIR}/ntripserver.sh" 
+    DESTINATION bin
+    PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_EXECUTE GROUP_READ WORLD_EXECUTE WORLD_READ
+    )
+install(
+    FILES "${CMAKE_CURRENT_SOURCE_DIR}/ntripserver.conf"  
+    DESTINATION /etc/default/
+    )
+install(
+    FILES "${CMAKE_CURRENT_SOURCE_DIR}/ntripserver-init.sh"  
+    DESTINATION /etc/init.d/
+    PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_EXECUTE GROUP_READ WORLD_EXECUTE WORLD_READ
+    )
