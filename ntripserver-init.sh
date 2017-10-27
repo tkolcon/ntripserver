@@ -10,6 +10,7 @@
     
 set -e
 daemon="/usr/bin/ntripserver.sh"
+process_kill="ntripserver"
 pidfile="/var/run/ntripserver.pid"
 daemon_opts=""
     
@@ -28,12 +29,14 @@ case "${1}" in
     stop)
         echo -n "Stopping ntripserver: "
         start-stop-daemon -K -q -p "${pidfile}"
+        killall "${process_kill}"
         rm "${pidfile}"
         echo "done"
         ;;
     restart)
         echo -n "Restarting ntripserver: "
         start-stop-daemon -K -q -p "${pidfile}"
+        killall "${process_kill}"
         rm "${pidfile}"
         start-stop-daemon -S -b -m -p "${pidfile}" -x "${daemon}" -- ${daemon_opts}
         echo "done"
